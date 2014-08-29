@@ -1,0 +1,752 @@
+<!--
+ * Copyright 1999 Microsoft Corporation.  All rights reserved.
+ -->
+
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    </head>
+    <style>
+        body        {margin: 0; font: menu; color: black}
+        #Panel      {position: absolute; width: 200px; height: 100%; visibility: hidden; overflow: auto}
+        #Corner     {padding-left: 12px; padding-top: 11px}
+        #FolderIcon {width: 32px; height: 32px}
+        #FolderName {margin-top: 8px; font: 14pt/14pt menu; font-weight: bold}
+        #LogoLine   {width: 100%; height: 2px; margin-top: 4px; vertical-align: top}
+        #Details    {padding-left: 12px; margin-top: 8px}
+        #Locked     {vertical-align: baseline}
+        #Preview    {}
+        .Movie      {width: 176px; height: 136px}
+        .Sound      {width: 176px; height: 46px}
+        .Divider    {width: 100%; color: #C0C0C0; height: 1px}
+        #Thumbnail  {width: 120px; height: 120px}
+        .Legend     {margin-left: 8px}
+        #FileList   {position: absolute; width: 0; height: 100%; border: 0}
+        p           {margin-top: 12px}
+        p.Half      {margin-top: 4px}
+        p.Button    {margin-top: 8px}
+        button      {font: 9pt 宋体, MS Song; margin-left: 12px}
+        .Message    {margin: -4px; margin-right: 0; padding: 3px; background: infobackground; color: infotext; border: 1px solid lightgrey}
+        #CSCPlusMin {width: 17px}
+        #CSCText    {}
+        #CSCDetail  {}
+        #CSCButton  {}
+    </style>
+
+    <script language="JavaScript">
+
+        // THIS SCRIPT IS COMMON FOR ALL CUSTOM WEB VIEWS
+
+        var L_Prompt_Text         = "选定项目可以查看其说明。";
+        var L_Empty_Text          = "该文件夹中没有项目可显示。";
+        var L_Multiple_Text       = " 个选定的项目。";
+        var L_Size_Text           = "大小: ";
+        var L_FileSize_Text       = "总计文件大小: ";
+        var L_Delimiter_Text      = ",";
+        var L_Bytes_Text          = "&nbsp;字节";
+        var L_Today_Text          = "今天";
+        var L_Yesterday_Text      = "昨天";
+        var L_Preview_Text        = "正在生成预览...";
+        var L_TotalSize_Text      = "总计: ";
+        var L_UsedSpace_Text      = "已用空间： ";
+        var L_FreeSpace_Text      = "可用空间: ";
+        var L_Attributes_Text     = "属性";
+        var L_Codes_Text          = "RHSaCE"; // suppress the Archive flag
+        var L_ReadOnly_Text       = "只读";
+        var L_Hidden_Text         = "隐藏";
+        var L_System_Text         = "系统";
+        var L_Archive_Text        = "存档";
+        var L_Compressed_Text     = "压缩";
+        var L_Encrypted_Text      = "加密";
+        var L_NoAttributes_Text   = "(正常)";
+        var L_SeeAlso_Text        = "另请参阅:";
+        var L_UsedSpaceTitle_Text = "已用空间";
+        var L_FreeSpaceTitle_Text = "可用空间";
+        var gAttributeNames       = new Array(L_ReadOnly_Text, L_Hidden_Text, L_System_Text, L_Archive_Text, L_Compressed_Text, L_Encrypted_Text);
+        var gIntroText            = "";
+        var gTimer                = 0;
+        var gDoBlends             = false && (navigator.cpuClass != "Alpha" && screen.colorDepth > 8);
+        var gPlusCold             = "<img id=CSCBmp align=middle src=pluscold.gif>";
+        var gPlusHot              = "<img id=CSCBmp align=middle src=plushot.gif>";
+        var gMinusCold            = "<img id=CSCBmp align=middle src=mincold.gif>";
+        var gMinusHot             = "<img id=CSCBmp align=middle src=minhot.gif>";
+        var gToday;
+        var gYesterday;
+        var gFolderPath           = "";
+        var gFoundAuthor          = false;
+
+        function FormatDetail(label, data) {
+            var s;
+            if (label.length + data.length > 32)
+                s = "<p>" + label + ":<br>" + data;
+            else
+                s = "<p>" + label + ": " + data;
+            return s;
+        }
+
+        function SanatizeString(data) {
+          var re = /</g;
+          var s = data.replace( re, "&lt;");
+          re = />/g;
+          s = s.replace( re, "&gt;");
+
+          return s;
+        }
+
+        function ShowInfo() {
+            // updates the left info panel when you select icons
+            var item;
+            var name;
+            var data;
+            var text;
+            var title;
+            var size = 0;
+            var i;
+
+            if (gDoBlends) {
+                Panel.filters.blendTrans.Stop();
+                Panel.filters.blendTrans.Apply();
+            }
+
+            // kill any preview
+            Preview.innerHTML = "";
+            Preview.style.display = "none";
+            Thumbnail.style.display = "none";
+
+            data = FileList.SelectedItems().Count;
+            if (data == 0)
+                text = NoneSelected();
+            else if (data > 1)
+                text = ManySelected(data);
+            else {
+                item = FileList.SelectedItems().Item(0);
+
+                // name
+                name = FileList.Folder.GetDetailsOf(item, 0);
+                if (!name)
+                    name = item.Name;
+                text = "<b>" + SanatizeString(name) + "</b>";
+                if (false && IsFileLocked(FileList.Folder.GetDetailsOf(item, 4)))
+                    text += "&nbsp;&nbsp;<img id=Locked src='res://webview.dll/Locked.gif'>";
+
+                // type
+                data = FileList.Folder.GetDetailsOf(item, 2);
+                if (data)
+                    text += "<br>" + data;
+
+                // date
+                text += HandleDate(item);
+
+                // size
+                text += HandleSize(item);
+
+                // extra details?
+                gFoundAuthor = false;
+                for (i = 4; i < 10; i++) {
+                    title = FileList.Folder.GetDetailsOf(null, i);
+                    if (!title)
+                        break;
+                    data = FileList.Folder.GetDetailsOf(item, i);
+                    if (title == L_Attributes_Text)
+                        text += "<p>" + title + ": " + FormatAttributes(data);
+                    else if (data) {
+                        var safeData = SanatizeString(data);
+                        if (title == "Author") {
+                            gFoundAuthor = true;
+                            text += "<p>" + title + ": <a href='mailto:" + safeData + "'>" + safeData + "</a>";
+                        } else
+                            text += FormatDetail(title, safeData);
+                    }
+                }
+
+                Info.innerHTML = text;  // errors may be generated if the thumbnail or media preview controls
+                                        // are not available. So, we "flush" the text before that
+
+                // try to generate a new thumbnail or media preview
+                if (item.Size)
+                    if (Thumbnail.displayFile(item.Path))
+                        gTimer = window.setTimeout('Preview.innerHTML = "<br>" + L_Preview_Text; Preview.style.display = ""', 1000);
+                    else
+                    {
+                        ext = GetFileExtension(item.Path);
+                        if (IsMovieFile(ext))
+                        {
+                            Preview.innerHTML = '<p>' +
+                                '<object ID=MediaPlayer class=Movie classid="clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95">' +
+                                    '<param name="ShowDisplay" value=false>'+
+                                    '<param name="AutoPlay" value="false">' +
+                                '</object>';
+                            MediaPlayer.EnableContextMenu = false;
+                            MediaPlayer.Open(item.Path);
+                        }
+                        else if (IsSoundFile(ext))
+                        {
+                            Preview.innerHTML = '<p>' +
+                                '<object  ID=MediaPlayer class=Sound classid="clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95">' +
+                                    '<param name="ShowDisplay" value="false">'+
+                                    '<param name="AutoPlay" value="false">' +
+                                '</object>';
+                            MediaPlayer.EnableContextMenu = false;
+                            MediaPlayer.Open(item.Path);
+                        }
+
+                        if (Preview.innerHTML != "")
+                            Preview.style.display = "";
+                    }
+            }
+            // replace Info with the new text
+            Info.innerHTML = text;
+            if (gDoBlends)
+                Panel.filters.blendTrans.Play();
+        }
+
+        function FormatNumber(n) {
+            var s = "";
+            var i, j = 0;
+            for (i = n.length - 1; i >= 0; i--) {
+                s = n.charAt(i) + s;
+                if (i && ((++j % 3) == 0))
+                    s = L_Delimiter_Text + s;
+            }
+            return s;
+        }
+
+        function HandleSize(item) {
+            var s = "";
+            var size = item.Size;
+            if (size && size < 1000)
+                s = "<p>" + L_Size_Text + size + L_Bytes_Text;
+            else {
+                var data = FileList.Folder.GetDetailsOf(item, 1);
+                if (data)
+                    s = "<p>" + FileList.Folder.GetDetailsOf(null, 1) + ": " + data;
+                else if (size)
+                    s = "<p>" + L_Size_Text + FormatNumber(size.toString()) + L_Bytes_Text;
+            }
+            return s;
+        }
+
+        function HandleDate(item) {
+            var s = "";
+            var data = FileList.Folder.GetDetailsOf(item, 3);
+            if (data) 
+                s = "<p>" + FileList.Folder.GetDetailsOf(null, 3) + ": " + data;
+            return s;
+        }
+
+        function FormatAttributes(data) {
+            var s = "";
+            var code;
+            for (i = 0; i < L_Codes_Text.length; i++) {
+                code = L_Codes_Text.charAt(i);
+                if (data.indexOf(code) > -1) {
+                    if (s)
+                        s += ", ";
+                    s += gAttributeNames[i];
+                }
+            }
+            if (!s)
+                s = L_NoAttributes_Text;
+            return s;
+        }
+
+        function FormatComment(data) {
+            var s = "";
+            if (data) {
+                data = SanatizeString( data );
+                var start;
+                var end;
+                var theLink;
+                var a = data.split("\n");
+                var L_Author_Text = "作者: ";
+
+                // look for a contact
+                for (var i in a) {
+                    start = a[i].indexOf(L_Author_Text);
+                    if (start < 0)
+                        continue;
+                    if (gFoundAuthor) // already in Details column
+                        a[i] = "";
+                    else {
+                        start += L_Author_Text.length;
+                        end = a[i].length;
+                        theLink = data.substring(start, end);
+                        a[i] = L_Author_Text + "<a href='mailto:" + theLink + "'>" + theLink + "</a>";
+                    }
+                }
+
+                // parse lines for Office files without breaking links below
+                data = a.join("<br>\n");
+                // look for embedded links
+                start = data.indexOf("http://");
+                if (start < 0)
+                    start = data.indexOf("file://");
+                if (start < 0)
+                    s += data;
+                else {
+                    end = data.indexOf(" ", start);
+                    if (end < 0)
+                        end = data.length;
+                    if (start > 0)
+                        s += data.substring(0, start - 1);
+                    theLink = data.substring(start, end);
+                    s += theLink.link(theLink);
+                    if (end < data.length)
+                        s += data.substring(end + 1, data.length);
+                }
+            }
+            return s;
+        }
+
+        function GetFileExtension(name) {
+            var ext = name.substring(name.lastIndexOf(".") + 1, name.length);
+            return ext.toLowerCase();        
+        }
+
+        function IsMovieFile(ext) {
+            var types = ",asf,avi,m1v,mov,mp2,mpa,mpe,mpeg,mpg,mpv2,qt,asx,";
+            var temp = ","+ext+",";
+            return types.indexOf(temp) > -1;
+        }
+
+        function IsSoundFile(ext) {
+            var types = ",aif,aiff,au,mid,midi,rmi,snd,wav,mp3,m3u,wma,";
+            var temp = ","+ext+",";
+            return types.indexOf(temp) > -1;
+        }
+
+        function IsFileLocked(name) {
+            return (name.indexOf(L_Codes_Text.charAt(0)) > -1);
+        }
+
+        function GetMessage() {
+            var s = "";
+            return (s) ? "<p><div class=Message>" + s + "</div>" : "";
+        }
+
+        function CSCFolderStatus() {
+            return FileList.Folder.OfflineStatus;
+        }
+
+        function CSCSynchronize() {
+            FileList.Folder.Synchronize();
+        }
+
+        function CSCGetStatusText(status)
+        {
+            var s = "";
+            var L_Online_Text                   = "该文件夹处于<b>联机状态</b>。";
+            var L_Offline_Text                  = "该文件夹处于<b>脱机状态</b>。";
+            var L_ServerAvailable_Text          = "该文件夹处于<b>脱机状态</b>，现在您可以进行同步处理。";
+            var L_DirtyCache_Text               = "该文件夹处于<b>联机状态</b>，但已过时。";
+
+            switch(status)
+            {
+            case 0:
+                s = L_Online_Text;
+                break;
+            case 1:
+                s = L_Offline_Text;
+                break;
+            case 2:
+                s = L_ServerAvailable_Text;
+                break;
+            case 3:
+                s = L_DirtyCache_Text;
+                break;
+            }
+            return s;
+        }
+
+        function CSCGetStatusDetail(status)
+        {
+            var s = "";
+            var L_OnlineExpand_Text            = "您可以使此文件夹中的文件在断开与网络的连接时仍然可用，只需选中文件，然后单击“文件”菜单中的“允许脱机使用”即可。";
+            var L_OfflineExpand_Text           = "您脱机状态下所做的任何更改都需要在下次连接到网络上时进行同步处理。";
+            var L_ServerAvailableExpand_Text   = "拥有该文件夹的服务器又重新可用。";
+            var L_DirtyCacheExpand_Text        = "脱机工作时所做的更改还没有进行同步处理。";
+            switch(status)
+            {
+            case 0:
+                s = L_OnlineExpand_Text;
+                break;
+            case 1:
+                s = L_OfflineExpand_Text;
+                break;
+            case 2:
+                s = L_ServerAvailableExpand_Text;
+                break;
+            case 3:
+                s = L_DirtyCacheExpand_Text;
+                break;
+            }
+            return s;
+        }
+
+        function CSCGetStatusButton(status)
+        {
+            var s = "";
+            var L_SynchronizeButton_Text        = "<p class=Button><button onclick='CSCSynchronize()'>同步</button>";
+            if ((status == 2) || (status == 3))
+            {
+                s = L_SynchronizeButton_Text;
+            }
+            return s;
+        }
+
+        function CSCShowStatusInfo(expand)
+        {
+//            var status = CSCFolderStatus();  Doesn't work on downlevel webview (IE4), so commenting out.
+            var status = -1;
+            
+            if (status >= 0)
+            {
+                var fIsHot = (CSCText.style.color == document.linkColor);
+
+                CSCText.innerHTML = CSCGetStatusText(status);
+                if (expand)
+                {
+                    CSCText.innerHTML += "<br>";
+                    if (fIsHot)                        
+                        CSCPlusMin.innerHTML = gMinusHot;
+                    else
+                        CSCPlusMin.innerHTML = gMinusCold;
+                    CSCDetail.innerHTML = CSCGetStatusDetail(status) + "<br>";
+                    CSCDetail.style.marginLeft = CSCText.offsetLeft;
+                    CSCDetail.style.display = "";
+                }
+                else
+                {
+                    if (fIsHot)
+                        CSCPlusMin.innerHTML = gPlusHot;
+                    else
+                        CSCPlusMin.innerHTML = gPlusCold;
+                    CSCDetail.style.display = "none";
+                }
+                var cscButton = CSCGetStatusButton(status);
+                if (cscButton.length > 0)
+                {
+                    CSCButton.innerHTML = cscButton;
+                    CSCButton.style.display = ""
+                }
+                else
+                {
+                    CSCButton.style.display = "none"
+                }
+                CSC.style.display = "";
+            }
+            else
+            {
+                CSC.style.display = "none";
+            }
+        }
+
+        function CSCShowExpandedStatus(expand)
+        {
+            CSCShowStatusInfo(true);
+        }
+
+        function CSCShowFoldedStatus(expand)
+        {
+            CSCShowStatusInfo(false);
+        }
+
+        function IsCSCStatusExpanded()
+        {
+            return ((CSCPlusMin.innerHTML.indexOf("mincold.gif") != -1) ||
+                    (CSCPlusMin.innerHTML.indexOf("minhot.gif") != -1));
+
+        }
+
+        function IsCSCStatusFolded()
+        {
+            return ((CSCPlusMin.innerHTML.indexOf("pluscold.gif") != -1) ||
+                    (CSCPlusMin.innerHTML.indexOf("plushot.gif") != -1));
+        }
+
+        function CSCShowStatus()
+        {
+            if (IsCSCStatusExpanded())
+            {
+                CSCShowExpandedStatus();
+            }
+            else    // Default to folded status
+            {
+                CSCShowFoldedStatus();
+            }
+        }
+
+        function CSCShowStatus_FoldExpand_Toggle()
+        {
+            if (IsCSCStatusExpanded())
+            {
+                CSCShowFoldedStatus();
+            }
+            else if(IsCSCStatusFolded())
+            {
+                CSCShowExpandedStatus();
+            }
+        }
+
+        function CSC_MouseOver()
+        {
+            if (CSCText.style.cursor == "hand")
+                return;
+
+            if (IsCSCStatusExpanded())
+                CSCPlusMin.innerHTML = gMinusHot;
+            else
+                CSCPlusMin.innerHTML = gPlusHot;
+            CSCText.style.color = document.linkColor;
+            CSCPlusMin.style.cursor = "hand";
+            CSCText.style.cursor = "hand";
+        }
+
+        function CSC_MouseOut()
+        {
+            if (CSCText.style.cursor == "auto")
+                return;
+
+            if (element = window.event.toElement)
+            {
+                idCursor = element.id;
+                if (idCursor == "CSCDiv" ||
+                    idCursor == "CSCText" ||
+                    idCursor == "CSCPlusMin" ||
+                    idCursor == "CSCBmp")
+                {
+                    return;
+                }
+            }
+
+            if (IsCSCStatusExpanded())
+                CSCPlusMin.innerHTML = gMinusCold;
+            else
+                CSCPlusMin.innerHTML = gPlusCold;
+            CSCText.style.color = "black";
+            CSCPlusMin.style.cursor = "auto";
+            CSCText.style.cursor = "auto";
+        }
+
+        function NoneSelected() {
+            //var s = gIntroText + (FileList.Folder.Items().Count ? L_Prompt_Text : L_Empty_Text);
+            var s = gIntroText + L_Prompt_Text;
+
+            s += GetMessage();
+
+            if (false || gFolderPath.length == 4) { // true allows all subfolders to show the pie chart
+                drive = gFolderPath.substring(0, 3);
+                if (Thumbnail.displayFile(drive)) {
+                    if (gFolderPath.length == 4)
+                        s += "<p><br>" + L_TotalSize_Text + Thumbnail.totalSpace + "<p>";
+                    else
+                        s += "<p><br>" + drive.link(drive) + "<p><p>" + L_TotalSize_Text + Thumbnail.totalSpace;
+                    s += "<p><table class=Legend width=12 height=12 border=1 align=left bgcolor=threedface bordercolordark=black bordercolorlight=black><tr><td title=\'";
+                    s += L_UsedSpaceTitle_Text;
+                    s += "\'></td></tr></table>&nbsp;" + L_UsedSpace_Text + Thumbnail.usedSpace;
+                    s += "<p><table class=Legend width=12 height=12 border=1 align=left bgcolor=threedhighlight bordercolordark=black bordercolorlight=black><tr><td title=\'";
+                    s += L_FreeSpaceTitle_Text;
+                    s += "\'></td></tr></table>&nbsp;" + L_FreeSpace_Text + Thumbnail.freeSpace;
+                    Thumbnail.style.display = "";
+                }
+            }
+            return s;
+        }
+
+        function ManySelected(items) {
+            var s = items + L_Multiple_Text + "<p>";
+            var size = 0;
+            if (items <= 100) {
+                for (var i = 0; i < items; i++)
+                    size += FileList.SelectedItems().Item(i).Size;
+                if (size)
+                    s += L_FileSize_Text + FormatNumber(size.toString()) + L_Bytes_Text + "<p>";
+                if (items <= 16)
+                    for (i = 0; i < items; i++)
+                        s += SanatizeString(FileList.SelectedItems().Item(i).Name) + "<br>";
+            }
+            return s;
+        }
+
+        // EVENTS
+
+        function Resize() {
+            if (document.body.clientWidth < Panel.style.pixelWidth * 2) {
+                Panel.style.visibility = "hidden";
+                FileList.style.pixelLeft = 0;
+            } else {
+                Panel.style.visibility = "visible";
+                FileList.style.pixelLeft = Panel.style.pixelWidth;
+            }
+            FileList.style.pixelWidth = document.body.clientWidth - FileList.style.pixelLeft
+        }
+
+        function ThumbnailReady() {
+            window.clearTimeout(gTimer);
+            Preview.innerHTML = "";
+            Preview.style.display = "none";
+            if (Thumbnail.haveThumbnail())
+                Thumbnail.style.display = "";
+        }
+
+        // INITIALIZATION
+
+        function Initialize(introText) {
+            gIntroText = introText;
+            gFolderPath = Info.innerHTML;
+
+            Thumbnail.style.display = "none";
+
+            CSCShowStatus();
+            
+            Info.innerHTML = NoneSelected();
+
+            // fix styles
+            var L_SystemFont1_Text = "宋体, MS Song";
+            var L_SystemFont2_Text = "宋体, MS Song";
+            var L_SystemFont_Text = "宋体, MS Song";
+            var tr = document.body.createTextRange();
+            if (navigator.cpuClass != "Alpha") {
+                tr.collapse();
+                var actualFont = tr.queryCommandValue("FontName");
+                if (actualFont == L_SystemFont1_Text || actualFont == L_SystemFont2_Text)
+                    document.body.style.fontFamily = L_SystemFont_Text;
+            } else
+                document.body.style.fontFamily = L_SystemFont_Text;
+
+            // init relative dates
+            gToday = new Date();
+            gToday = gToday.toLocaleString();
+            gToday = gToday.substring(0, gToday.indexOf(' '));
+            gYesterday = new Date(Date.parse(gToday) - (1000 * 60 * 60 * 24));
+            gYesterday = gYesterday.toLocaleString();
+            gYesterday = gYesterday.substring(0, gYesterday.indexOf(' '));
+
+            // call our Resize() function whenever the window gets resized
+            window.onresize = Resize;
+        }
+
+        function OnWebviewLinkEnter( aLink )
+        {
+            if( aLink.title )
+            {
+                window.status = aLink.title;
+            }
+            else
+            {
+                window.status = "";
+            }
+            return true;
+        }
+
+        function OnWebviewLinkExit()
+        {
+            window.status = "";
+            return false;
+        }
+    </script>
+
+    <script language="JavaScript">
+        function errorHandler() {
+            return true;    // Don't show the default error message box
+        }
+    </script>
+
+    <script language="JavaScript">
+        function Load() {
+            window.onerror = errorHandler;
+            Initialize("");
+            Resize();
+        }
+    </script>
+
+    <script language="JavaScript" for="Thumbnail" event="OnThumbnailReady">
+        ThumbnailReady();
+    </script>
+
+    <script language="JavaScript" for="FileList" event="SelectionChanged">
+        window.clearTimeout(gTimer);
+        gTimer = window.setTimeout("ShowInfo()", gDoBlends ? 500 : 0); // need actual double-click time
+    </script>
+
+    <script language="JavaScript">
+        function OnVerbInvoked()
+        {
+            if (Preview.innerHTML != "")
+            {
+                MediaPlayer.Stop();
+            }
+        }
+    </script>
+
+    <script language="JavaScript" for="FileList" event="VerbInvoked">
+        // If the user immediately double-clicks the file, we would get
+        // a selection changed event immediately followed by the VerbInvoked
+        // event and we would not have had enough time to create the MediaPlayer
+        // in the SelectionChanged event handler. So, we delay handling this
+        // event a little bit
+        window.setTimeout("OnVerbInvoked()", 500);
+    </script>
+
+    <script language="JavaScript" for="WVLink" event="onmouseover">
+        return OnWebviewLinkEnter( this );
+    </script>
+
+    <script language="JavaScript" for="WVLink" event="onfocus">
+        return OnWebviewLinkEnter( this );
+    </script>
+
+    <script language="JavaScript" for="WVLink" event="onmouseout">
+        return OnWebviewLinkExit();
+    </script>
+
+    <script language="JavaScript" for="WVLink" event="onblur">
+        return OnWebviewLinkExit();
+    </script>
+        
+    <body scroll=no onload=Load()>
+        <div id=Panel style="background: white URL(wvleft.bmp) no-repeat">
+            <div id=Corner>
+                <object id=FolderIcon classid="clsid:E5DF9D10-3B52-11D1-83E8-00A0C90DC849" tabIndex=-1>
+                    <param name="scale" value=100>
+                </object>
+                <br>
+                <div id=FolderName>
+                    %THISDIRNAME%
+                </div>
+            </div>
+            <img id=LogoLine src="wvline.gif">
+            <div id=Details>
+                <span id=CSC>
+                    <div id=CSCDiv tabIndex=2 onmouseover="CSC_MouseOver()" onmouseout="CSC_MouseOut()" onclick="CSCShowStatus_FoldExpand_Toggle()" onkeypress="CSCShowStatus_FoldExpand_Toggle()">
+                    <span id=CSCPlusMin>
+                    </span>
+                    <span id=CSCText>
+                    </span>
+                    <br>
+                    </div>
+                    <div id=CSCDetail>
+                    </div>
+                    <span id=CSCButton>
+                    </span>
+                    <hr CLASS=Divider NOSHADE>
+                </span>
+                <span id=Info>
+                    %THISDIRPATH%
+                </span>
+                <div id=Preview style="display: none">
+                </div>
+                <br>
+
+                <object id=Thumbnail classid="clsid:1D2B4F40-1F10-11D1-9E88-00C04FDCAB92" tabIndex=-1>
+                </object>
+                <label id=ThumbnailLabel for="Thumbnail" style="display: none">
+                </label>
+
+            </div>
+        </div>
+        <object id=FileList classid="clsid:1820FED0-473E-11D0-A96C-00C04FD705A2" tabIndex=1>
+        </object>
+    </body>
+</html>
+

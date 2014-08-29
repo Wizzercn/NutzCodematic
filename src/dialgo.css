@@ -1,0 +1,1161 @@
+.hint-icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 10;
+    overflow: hidden;
+    background-image: url(../images/hint_icon.png);
+    background-repeat: no-repeat;
+    _background-image: url(../images/hint_icon.gif)
+}
+
+.hint-inf-m, .hint-war-m, .hint-suc-m, .hint-err-m {
+    width: 20px;
+    height: 20px
+}
+
+.hint-inf-s, .hint-war-s, .hint-suc-s, .hint-err-s {
+    width: 16px;
+    height: 16px
+}
+
+.hint-inf {
+    background-position: 0 0
+}
+
+.hint-war {
+    background-position: -32px 0
+}
+
+.hint-suc {
+    background-position: -64px 0
+}
+
+.hint-err {
+    background-position: -96px 0
+}
+
+.hint-inf-m {
+    background-position: 0 -32px
+}
+
+.hint-war-m {
+    background-position: -22px -32px
+}
+
+.hint-suc-m {
+    background-position: -44px -32px
+}
+
+.hint-err-m {
+    background-position: -66px -32px
+}
+
+.hint-inf-s {
+    background-position: 0 -54px
+}
+
+.hint-war-s {
+    background-position: -18px -54px
+}
+
+.hint-suc-s {
+    background-position: -36px -54px
+}
+
+.hint-err-s {
+    background-position: -54px -54px
+}
+
+.popup-hint {
+    position: absolute
+}
+
+.popup-hint .hint-icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 1
+}
+
+.popup-hint .hint-loader {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    z-index: 1;
+    width: 16px;
+    height: 16px;
+    background: url(../images/hint_loader.gif) no-repeat 0 0
+}
+
+.popup-hint em {
+    position: relative;
+    float: left;
+    width: 15px;
+    height: 30px;
+    overflow: hidden;
+    background-image: url(../images/hint_cor.png);
+    _background: none
+}
+
+.popup-hint em b {
+    display: none;
+    _display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src = 'http://115.com/static/style_v61/images/hint_cor.png', sizingMethod = 'image')
+}
+
+.popup-hint .sl {
+    background-position: 0 0
+}
+
+.popup-hint .sr {
+    background-position: -15px 0
+}
+
+.popup-hint .sr b {
+    left: -15px
+}
+
+.popup-hint span {
+    float: left;
+    height: 30px;
+    padding-left: 15px;
+    line-height: 31px;
+    overflow: hidden;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.5);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#7F000000', endColorstr = '#7F000000')
+}
+
+html:root .popup-hint span {
+    filter: none
+}
+
+.dialog-box {
+    position: absolute;
+    width: 500px;
+    border: 1px solid #bcbcbc;
+    background: #FFF;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4)
+}
+
+.dialog-box iframe {
+    display: block;
+    margin: 0
+}
+
+.dialog-box .button {
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    padding: 0 15px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    background: #1f468a;
+    cursor: pointer
+}
+
+.dialog-box .button:hover {
+    text-decoration: none;
+    background: #005bbb
+}
+
+.dialog-box .button:active {
+    background: #30466f
+}
+
+.dialog-box .button span {
+    float: left;
+    padding-left: 8px
+}
+
+.dialog-box .button em {
+    display: none
+}
+
+.dialog-box .button b {
+    float: left;
+    padding-right: 12px
+}
+
+.dialog-box .button s {
+    position: absolute;
+    top: 17px;
+    right: 15px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border: 5px solid;
+    border-color: white transparent transparent;
+    _border-color: white pink pink;
+    _filter: chroma(color = pink)
+}
+
+.dialog-box .btn-gray {
+    color: #333;
+    background: #d3d7e0
+}
+
+.dialog-box .btn-gray:hover {
+    background: #dce0eb
+}
+
+.dialog-box .btn-gray:active {
+    background: #babec7
+}
+
+.dialog-box .btn-gray b {
+    color: #333
+}
+
+.dialog-box .btn-gray s {
+    border-top-color: #999
+}
+
+.dialog-box .btn-disabled, .dialog-box .btn-disabled:hover, .dialog-box .btn-disabled:active {
+    color: #999;
+    background: #d7d8da;
+    cursor: not-allowed
+}
+
+.dialog-box button.button {
+    height: 40px;
+    padding: 0 10px;
+    line-height: normal;
+    border: 0 none
+}
+
+.common-dialog-con {
+    border: 0 none;
+    box-shadow: none
+}
+
+.common-dialog-con .dialog-title {
+    display: none
+}
+
+.dialog-title {
+    position: relative;
+    height: 54px;
+    margin: 0;
+    padding: 0 15px;
+    line-height: 54px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid #EFEFEF;
+    background: #FAFAFA
+}
+
+.dialog-title strong {
+    position: relative;
+    float: left;
+    padding-right: 15px;
+    cursor: pointer
+}
+
+.dialog-title strong i {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border: 5px solid;
+    border-color: #666 transparent transparent;
+    _filter: chroma(color = pink)
+}
+
+.dialog-handle {
+    position: absolute;
+    top: 19px;
+    right: 15px
+}
+
+.dialog-handle a {
+    float: left;
+    margin-left: 15px;
+    width: 16px;
+    height: 16px;
+    line-height: 10;
+    overflow: hidden;
+    background-image: url(../images/icon_dialog_handle.gif?v=0);
+    background-repeat: no-repeat
+}
+
+.dialog-handle a:hover {
+    background-position-y: -16px
+}
+
+.diag-close {
+    background-position: 0 0
+}
+
+.diag-minimize {
+    background-position: -16px 0
+}
+
+.diag-maximize {
+    background-position: -32px 0
+}
+
+.diag-return {
+    background-position: -48px 0
+}
+
+.dialog-tab {
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.dialog-tab li {
+    position: relative;
+    float: left;
+    height: 54px;
+    padding: 0 20px;
+    line-height: 55px;
+    overflow: hidden;
+    border-right: 1px solid #d2d2d2;
+    cursor: pointer
+}
+
+.dialog-tab li.focus {
+    height: 55px;
+    background: #FFF;
+    cursor: default
+}
+
+.dialog-tab li em {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    min-width: 10px;
+    height: 16px;
+    padding: 0 3px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: normal;
+    color: #FFF;
+    background: #F0561D;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    -webkit-text-size-adjust: none
+}
+
+.dg-sub-tab {
+    position: relative;
+    height: 43px;
+    border-bottom: 1px solid #d1d1d1;
+    background: #F8F8F8
+}
+
+.dg-sub-tab ul {
+    position: absolute;
+    top: 10px;
+    left: 10px
+}
+
+.dg-sub-tab li {
+    float: left;
+    margin-right: 5px
+}
+
+.dg-sub-tab li a {
+    float: left;
+    height: 33px;
+    padding: 0 15px;
+    line-height: 33px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    border: 1px solid;
+    border-bottom: 0 none;
+    border-color: transparent;
+    _border-color: pink;
+    _filter: chroma(color = pink)
+}
+
+.dg-sub-tab li a:hover {
+    text-decoration: none
+}
+
+.dg-sub-tab li a.focus, .dg-sub-tab li a.focus:hover {
+    border-color: #D1D1D1;
+    background: #FFF
+}
+
+.dialog-bottom {
+    position: relative;
+    height: 40px;
+    padding: 20px;
+    overflow: hidden;
+    background: #F9F9F9
+}
+
+.dialog-bottom .button {
+    float: left;
+    margin-right: 20px;
+    padding: 0 30px
+}
+
+.dialog-bottom .con {
+    float: right;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666
+}
+
+.dialog-bottom .con .button {
+    margin: 0 0 0 20px
+}
+
+.dialog-bottom .con .btn-link {
+    position: relative;
+    top: 10px;
+    float: left;
+    margin-left: 20px;
+    line-height: 20px;
+    color: #666;
+    padding: 0 2px
+}
+
+.dialog-bottom .con .btn-link:hover {
+    background: #224888;
+    color: #fff;
+    text-decoration: none
+}
+
+.dialog-bottom .dialog-status {
+    float: left;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666
+}
+
+.dialog-msg {
+    width: 300px;
+    margin: auto;
+    padding: 20px 0
+}
+
+.dialog-msg h3 {
+    position: relative;
+    width: 260px;
+    height: 30px;
+    padding: 10px 0 10px 40px;
+    zoom: 1;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: normal
+}
+
+.dialog-msg h3 .hint-icon {
+    position: absolute;
+    top: 10px;
+    left: 0
+}
+
+.dialog-msg h3 span {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.dialog-msg-text {
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    color: #bbb
+}
+
+.dialog-input {
+    position: relative;
+    padding: 30px;
+    zoom: 1
+}
+
+.dialog-input .text {
+    width: 420px;
+    height: 14px;
+    padding: 12px 9px;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    border: 1px solid;
+    border-color: #CECECF;
+    background: white;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1)
+}
+
+.dialog-input .text:focus {
+    outline: none;
+    border-color: #92AFED;
+    box-shadow: 0 0 5px #92afec, inset 1px 1px 2px rgba(0, 0, 0, 0.1)
+}
+
+.dialog-input .file-ext-name {
+    position: absolute;
+    top: 31px;
+    right: 31px;
+    height: 38px;
+    padding: 0 10px;
+    line-height: 38px;
+    font-size: 16px;
+    color: #999;
+    background: #F6F6F6
+}
+
+.dialog-input label {
+    display: block;
+    margin-bottom: 3px;
+    line-height: 20px;
+    text-align: right;
+    color: #999
+}
+
+.dialog-input textarea {
+    display: block;
+    width: 420px;
+    margin: 0
+}
+
+.dialog-input textarea {
+    height: 80px;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: normal
+}
+
+.dialog-file-info {
+    float: left;
+    height: 40px;
+    color: #999
+}
+
+.dialog-file-info .file-type {
+    float: left;
+    margin: 4px 10px 0 0
+}
+
+.dialog-file-info span {
+    float: left;
+    max-width: 270px;
+    line-height: 40px;
+    overflow: hidden
+}
+
+.property-editor {
+    width: 600px
+}
+
+.property-editor .editor-contents {
+    position: relative;
+    width: 538px;
+    height: 292px;
+    margin: 30px auto;
+    border: 1px solid #d7d7d7;
+    overflow: hidden
+}
+
+.dialog-frame {
+    position: relative
+}
+
+.dialog-frame iframe, .window-frame iframe, .popup-window iframe, .dg-sub-frame iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+
+.window-frame {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    bottom: 0;
+    left: 0
+}
+
+.dg-sub-frame {
+    position: absolute;
+    top: 85px;
+    right: 0;
+    bottom: 0;
+    left: 0
+}
+
+.file-select {
+    width: 700px
+}
+
+.file-select .dialog-frame {
+    height: 404px
+}
+
+.file-select .dialog-bottom {
+    padding: 10px;
+    border-top: 1px solid #d2d2d2
+}
+
+.file-select .dialog-bottom input {
+    position: relative;
+    top: 13px;
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin: 0
+}
+
+.file-select .dialog-bottom label {
+    float: left;
+    padding-left: 5px;
+    line-height: 40px
+}
+
+.share-box {
+    width: 700px
+}
+
+.share-box .dialog-frame {
+    height: 395px
+}
+
+.bottom-input {
+    position: relative;
+    top: 2px;
+    float: left;
+    border: 1px solid #ddd;
+    background: #fff
+}
+
+.bottom-input i, .bottom-input b {
+    position: absolute;
+    top: 9px;
+    left: -11px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border: 5px solid;
+    border-color: transparent #ddd transparent transparent;
+    _border-color: pink #ddd pink pink;
+    _filter: chroma(color = pink)
+}
+
+.bottom-input b {
+    left: -10px;
+    border-color: transparent #fff transparent transparent;
+    _border-color: pink #fff pink pink
+}
+
+.bottom-input input {
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    width: 120px;
+    height: 14px;
+    margin: 0;
+    padding: 7px;
+    font-size: 12px;
+    border: 0 none;
+    background: none
+}
+
+.easy-download {
+    width: 415px
+}
+
+.easy-download .dialog-frame {
+    height: 162px
+}
+
+.advanced-search {
+    padding-bottom: 30px
+}
+
+.advanced-search dl {
+    width: 290px;
+    margin: auto;
+    padding: 30px 30px 0;
+    overflow: hidden;
+    background: #FFF;
+    _zoom: 1
+}
+
+.advanced-search dt {
+    float: left;
+    width: 70px;
+    height: 34px;
+    padding-bottom: 20px;
+    line-height: 34px;
+    font-size: 14px;
+    text-align: right;
+    color: #666
+}
+
+.advanced-search dd {
+    float: left;
+    width: 200px;
+    height: 34px;
+    padding-bottom: 20px
+}
+
+.advanced-search .text {
+    width: 184px
+}
+
+.advanced-search select {
+    float: left;
+    width: 200px;
+    margin-top: 8px
+}
+
+.search-bottom {
+    text-align: center
+}
+
+.file-copy {
+    height: 300px;
+    overflow: auto;
+    border-bottom: 1px solid #EFEFEF
+}
+
+.file-copy ul {
+    overflow: hidden;
+    _zoom: 1
+}
+
+.file-copy li {
+    float: left;
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.file-copy .file-name {
+    width: 250px
+}
+
+.file-copy .file-rate {
+    float: right;
+    width: 100px
+}
+
+.file-copy dt {
+    height: 26px;
+    line-height: 26px;
+    border-bottom: 1px solid #f0f2f6
+}
+
+.file-copy dd {
+    height: 24px;
+    line-height: 24px
+}
+
+.file-copy dd em {
+    color: #4883D3
+}
+
+.file-copy dd:
+
+nth-of-type
+(
+2
+n
+
+)
+{
+background:#F8F8F8
+
+}
+.file-copy dd.err {
+    color: #F60
+}
+
+.offline-download-link {
+    width: 438px;
+    margin: 0 auto;
+    padding: 10px 0
+}
+
+.offline-download-link dt {
+    position: relative;
+    top: -5px;
+    line-height: 30px;
+    font-size: 14px
+}
+
+.offline-download-link dd {
+    position: relative;
+    height: 54px
+}
+
+.offline-download-link label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 324px;
+    height: 20px;
+    padding: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #999;
+    cursor: text
+}
+
+.offline-download-link .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 418px
+}
+
+.offline-bt {
+    padding: 30px 30px 20px
+}
+
+.offline-bt dt {
+    height: 34px;
+    margin-bottom: 20px
+}
+
+.offline-bt .text {
+    width: 420px
+}
+
+.bt-file-list {
+    border: 1px solid #ccc;
+    background: #FFF
+}
+
+.bt-file-list .checkbox {
+    float: left;
+    margin: 5px 5px 0 0
+}
+
+.bt-file-list .file-name {
+    float: left;
+    width: 310px;
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.bt-file-list .file-size {
+    float: left
+}
+
+.bt-file-list ul {
+    position: relative;
+    max-height: 155px;
+    _height: 155px;
+    overflow: auto
+}
+
+.bt-file-list li {
+    height: 30px;
+    padding-left: 6px;
+    line-height: 30px;
+    vertical-align: middle;
+    overflow: hidden;
+    border-bottom: 1px solid #e7e7e7;
+    _zoom: 1
+}
+
+.bt-file-list li:
+
+nth-child
+(
+2
+n
+
+)
+{
+background:#F9F9F9
+
+}
+.bt-file-list li:last-child {
+    border-bottom: 0 none
+}
+
+.bt-file-title {
+    height: 30px;
+    padding-left: 6px;
+    line-height: 30px;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    background: #f3f3f3
+}
+
+.bt-file-bottom {
+    height: 16px;
+    padding: 5px 0;
+    line-height: 16px;
+    text-align: right
+}
+
+.bt-file-bottom a {
+    float: left;
+    margin-right: 10px
+}
+
+.offline-pickcode {
+    position: relative;
+    padding: 15px 30px
+}
+
+.offline-pickcode p {
+    line-height: 24px
+}
+
+.offline-pickcode textarea {
+    width: 620px;
+    height: 220px;
+    margin-top: 10px
+}
+
+.pickcode-file {
+    margin: 30px 30px 20px
+}
+
+.pickcode-file ul {
+    max-height: 248px;
+    _height: 248px
+}
+
+.pickcode-file .file-name {
+    width: 280px
+}
+
+.pickcode-file .pickcode {
+    float: left;
+    width: 130px
+}
+
+.pickcode-file .file-size {
+    width: 90px
+}
+
+.pickcode-file .file-status {
+    float: left
+}
+
+.pickcode-file .file-status i {
+    color: #F60
+}
+
+.dg-sort {
+    position: relative;
+    max-height: 225px;
+    padding: 30px 30px 25px;
+    overflow: auto;
+    _height: 225px
+}
+
+.dg-sort li {
+    position: relative;
+    height: 38px;
+    margin-bottom: 5px;
+    padding: 0 10px;
+    line-height: 38px;
+    font-size: 14px;
+    vertical-align: middle;
+    border: 1px solid #EFEFEF;
+    background: #F9F9F9;
+    cursor: pointer
+}
+
+.dg-sort li em {
+    display: none;
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    _display: block
+}
+
+.dg-sort li em .icon {
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin-left: 10px;
+    line-height: 10;
+    overflow: hidden;
+    background-image: url(../images/icon_file_operate.gif);
+    background-repeat: no-repeat
+}
+
+.dg-sort li em .icon:hover {
+    background-position-y: -14px
+}
+
+.dg-sort li:hover {
+    border-color: #DDD
+}
+
+.dg-sort li:hover em {
+    display: block
+}
+
+.dg-sort li.selected {
+    border-color: #D7E5F3;
+    background: #F2F8FF
+}
+
+.isort-rename {
+    background-position: -42px 0
+}
+
+.isort-remove {
+    background-position: -28px 0
+}
+
+.dgsort-add {
+    position: relative;
+    top: 11px;
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    color: #666
+}
+
+.dgsort-add s {
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    background: url(../images/icon_add_remove.gif) no-repeat 0 0
+}
+
+.dgsort-add:hover {
+    text-decoration: none;
+    color: #36C
+}
+
+.dgsort-add:hover s {
+    background-position: 0 -18px
+}
+
+.dialog-space-glad {
+    padding: 70px 15px 40px;
+    text-align: center
+}
+
+.dialog-space-glad .icon-space-glad {
+    display: inline-block;
+    width: 84px;
+    height: 51px;
+    overflow: hidden;
+    vertical-align: middle;
+    background: url(../images/icon_cloud_space.gif)
+}
+
+.dialog-space-glad .space-glad-text {
+    display: inline-block;
+    max-width: 360px;
+    padding-left: 10px;
+    line-height: 24px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 16px;
+    color: #83A506;
+    *display: inline;
+    *zoom: 1
+}
+
+* html .window-frame {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: expression((function(el) { try { el.style.height=el.parentNode.parentNode.clientHeight-41+"px";
+    el . parentNode . parentNode . onresize = function() { el . style . height = el . parentNode . parentNode . clientHeight-41 + "px";
+}
+
+;
+}
+catch
+(
+e
+
+)
+{
+}
+}
+)
+(
+this
+
+)
+)
+}
+* html .dg-sub-frame {
+    position: relative;
+    top: 0;
+    height: expression((function(el) { try { el.style.height=el.parentNode.parentNode.clientHeight-85+"px";
+    el . parentNode . parentNode . onresize = function() { el . style . height = el . parentNode . parentNode . clientHeight-85 + "px";
+}
+
+;
+}
+catch
+(
+e
+
+)
+{
+}
+}
+)
+(
+this
+
+)
+)
+}
+* html .popup-window-wrap {
+    width: 100%;
+    height: expression((function(el) { try { el.style.height=document.body.clientHeight+40+"px";
+    window . attachEvent("onresize", function() { el . style . height = document . body . clientHeight +40 + "px";
+}
+
+)
+;
+}
+catch
+(
+e
+
+)
+{
+}
+}
+)
+(
+this
+
+)
+)
+}
+* html .dialog-file-info span {
+    width: expression(this.scrollWidth>270?"270px":"auto")
+}

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_07" class="java.beans.XMLDecoder"> 
+ <object class="com.jformdesigner.model.FormModel"> 
+  <void method="setProperty"> 
+   <string>i18n.bundleName</string> 
+   <string>sys</string> 
+  </void> 
+  <void method="setProperty"> 
+   <string>i18n.autoExternalize</string> 
+   <boolean>true</boolean> 
+  </void> 
+  <void method="setProperty"> 
+   <string>i18n.keyPrefix</string> 
+   <string>testsplash</string> 
+  </void> 
+  <void property="contentType"> 
+   <string>form/swing</string> 
+  </void> 
+  <void property="root"> 
+   <object class="com.jformdesigner.model.FormRoot"> 
+    <void method="add"> 
+     <object class="com.jformdesigner.model.FormWindow"> 
+      <string>javax.swing.JWindow</string> 
+      <object class="com.jformdesigner.model.FormLayoutManager"> 
+       <class>java.awt.BorderLayout</class> 
+      </object> 
+      <void method="setProperty"> 
+       <string>$sizePolicy</string> 
+       <int>1</int> 
+      </void> 
+      <void method="setProperty"> 
+       <string>$locationPolicy</string> 
+       <int>1</int> 
+      </void> 
+      <void method="setProperty"> 
+       <string>enabled</string> 
+       <boolean>false</boolean> 
+      </void> 
+      <void method="setProperty"> 
+       <string>focusable</string> 
+       <boolean>false</boolean> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JLabel</string> 
+        <void method="setProperty"> 
+         <string>icon</string> 
+         <object class="com.jformdesigner.model.SwingIcon"> 
+          <int>0</int> 
+          <string>/images/ico.gif</string> 
+         </object> 
+        </void> 
+        <void method="setProperty"> 
+         <string>horizontalAlignment</string> 
+         <int>0</int> 
+        </void> 
+        <void method="setProperty"> 
+         <string>preferredSize</string> 
+         <object class="java.awt.Dimension"> 
+          <int>540</int> 
+          <int>300</int> 
+         </object> 
+        </void> 
+        <void method="setProperty"> 
+         <string>minimumSize</string> 
+         <object class="java.awt.Dimension"> 
+          <int>540</int> 
+          <int>250</int> 
+         </object> 
+        </void> 
+        <void method="setProperty"> 
+         <string>maximumSize</string> 
+         <object class="java.awt.Dimension"> 
+          <int>540</int> 
+          <int>250</int> 
+         </object> 
+        </void> 
+        <void property="name"> 
+         <string>label1</string> 
+        </void> 
+       </object> 
+       <object class="com.jformdesigner.model.FormLayoutConstraints"> 
+        <class>java.lang.String</class> 
+        <void method="setProperty"> 
+         <string>value</string> 
+         <string>Center</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JTextField</string> 
+        <void method="setProperty"> 
+         <string>editable</string> 
+         <boolean>false</boolean> 
+        </void> 
+        <void method="setProperty"> 
+         <string>enabled</string> 
+         <boolean>false</boolean> 
+        </void> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>正在加载程序请稍候 → </string> 
+        </void> 
+        <void method="setProperty"> 
+         <string>background</string> 
+         <object class="java.awt.Color"> 
+          <int>0</int> 
+          <int>0</int> 
+          <int>0</int> 
+          <int>255</int> 
+         </object> 
+        </void> 
+        <void method="setProperty"> 
+         <string>foreground</string> 
+         <object class="java.awt.Color"> 
+          <int>255</int> 
+          <int>255</int> 
+          <int>255</int> 
+          <int>255</int> 
+         </object> 
+        </void> 
+        <void property="name"> 
+         <string>load</string> 
+        </void> 
+       </object> 
+       <object class="com.jformdesigner.model.FormLayoutConstraints"> 
+        <class>java.lang.String</class> 
+        <void method="setProperty"> 
+         <string>value</string> 
+         <string>South</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="com.jformdesigner.model.FormComponent"> 
+        <string>javax.swing.JTextField</string> 
+        <void method="setProperty"> 
+         <string>background</string> 
+         <object class="java.awt.Color"> 
+          <int>51</int> 
+          <int>51</int> 
+          <int>51</int> 
+          <int>255</int> 
+         </object> 
+        </void> 
+        <void method="setProperty"> 
+         <string>text</string> 
+         <string>　欢迎使用斌缘网络平台　　　　　　　　　　　　　　　　　　　　　合肥信息技术服务有限公司</string> 
+        </void> 
+        <void method="setProperty"> 
+         <string>foreground</string> 
+         <object class="java.awt.Color"> 
+          <int>255</int> 
+          <int>255</int> 
+          <int>255</int> 
+          <int>255</int> 
+         </object> 
+        </void> 
+        <void method="setProperty"> 
+         <string>enabled</string> 
+         <boolean>false</boolean> 
+        </void> 
+        <void property="name"> 
+         <string>textField1</string> 
+        </void> 
+       </object> 
+       <object class="com.jformdesigner.model.FormLayoutConstraints"> 
+        <class>java.lang.String</class> 
+        <void method="setProperty"> 
+         <string>value</string> 
+         <string>North</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void property="name"> 
+       <string>splash</string> 
+      </void> 
+     </object> 
+     <object class="com.jformdesigner.model.FormLayoutConstraints"> 
+      <null/> 
+      <void method="setProperty"> 
+       <string>location</string> 
+       <object class="java.awt.Point"> 
+        <int>45</int> 
+        <int>50</int> 
+       </object> 
+      </void> 
+      <void method="setProperty"> 
+       <string>size</string> 
+       <object class="java.awt.Dimension"> 
+        <int>540</int> 
+        <int>270</int> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 
