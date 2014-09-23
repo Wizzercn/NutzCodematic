@@ -533,13 +533,13 @@ public class SysBuldCtl {
             pandy[2] += "\n\t@Inject";
             pandy[2] += "\n\tprotected Dao dao;\n";
             pandy[2] += "\n\t@At(\"\")";
-            pandy[2] += "\n\t@Ok(\"->:/private/" + modelname.toLowerCase().replace(".","/") + "/" + tname + ".html\")";
+            pandy[2] += "\n\t@Ok(\"vm:template.private." + modelname.toLowerCase().replace(".","/") + "." + tname + "\")";
             pandy[2] += "\n\tpublic void index(@Param(\"sys_menu\") String sys_menu,HttpServletRequest req) {";
             pandy[2] += "\n\t\treq.setAttribute(\"sys_menu\",sys_menu);";
             pandy[2] += "\n\t}";
             pandy[2] += "\n\t";
             pandy[2] += "\n\t@At";
-            pandy[2] += "\n\t@Ok(\"->:/private/" + modelname.toLowerCase().replace(".","/") + "/" + tname + "Add.html\")";
+            pandy[2] += "\n\t@Ok(\"vm:template.private." + modelname.toLowerCase().replace(".","/") + "." + tname + "Add\")";
             pandy[2] += "\n\tpublic void toadd() {";
             pandy[2] += "\n\t";
             pandy[2] += "\n\t}";
@@ -567,7 +567,7 @@ public class SysBuldCtl {
                 pandy[2] += "\n\t";
 
                 pandy[2] += "\n\t@At";
-                pandy[2] += "\n\t@Ok(\"->:/private/" + modelname.toLowerCase().replace(".","/") + "/" + tname + "Update.html\")";
+                pandy[2] += "\n\t@Ok(\"vm:template.private." + modelname.toLowerCase().replace(".","/") + "." + tname + "Update\")";
                 pandy[2] += "\n\tpublic "+tname+" toupdate(@Param(\"" + pkname.toLowerCase() + "\") int " + pkname.toLowerCase() + ", HttpServletRequest req) {";
                 pandy[2] += "\n\t\treturn daoCtl.detailById(dao, " + tname + ".class, " + pkname.toLowerCase() + ");//html:obj";
                 pandy[2] += "\n\t}";
@@ -587,7 +587,7 @@ public class SysBuldCtl {
                 pandy[2] += "\n\t";
 
                 pandy[2] += "\n\t@At";
-                pandy[2] += "\n\t@Ok(\"->:/private/" + modelname.toLowerCase().replace(".","/") + "/" + tname + "Update.html\")";
+                pandy[2] += "\n\t@Ok(\"vm:template.private." + modelname.toLowerCase().replace(".","/") + "." + tname + "Update\")";
                 pandy[2] += "\n\tpublic "+tname+" toupdate(@Param(\"" + pkname.toLowerCase() + "\") String " + pkname.toLowerCase() + ", HttpServletRequest req) {";
                 pandy[2] += "\n\t\treturn daoCtl.detailByName(dao, " + tname + ".class, " + pkname.toLowerCase() + ");//html:obj";
                 pandy[2] += "\n\t}";
@@ -607,7 +607,7 @@ public class SysBuldCtl {
                 pandy[2] += "\n\t";
 
                 pandy[2] += "\n\t@At";
-                pandy[2] += "\n\t@Ok(\"->:/private/" + modelname.toLowerCase().replace(".","/") + "/" + tname + "Update.html\")";
+                pandy[2] += "\n\t@Ok(\"vm:template.private." + modelname.toLowerCase().replace(".","/") + "." + tname + "Update\")";
                 pandy[2] += "\n\tpublic "+tname+" toupdate(@Param(\"" + pkname.toLowerCase() + "\") long " + pkname.toLowerCase() + ", HttpServletRequest req) {";
                 pandy[2] += "\n\t\treturn daoCtl.detailById(dao, " + tname + ".class, " + pkname.toLowerCase() + ");//html:obj";
                 pandy[2] += "\n\t}";
@@ -627,7 +627,7 @@ public class SysBuldCtl {
                 pandy[2] += "\n\t";
 
                 pandy[2] += "\n\t//@At";
-                pandy[2] += "\n\t//@Ok(\"->:/private/" + modelname.toLowerCase().replace(".","/") + "/" + tname + "Update.html\")";
+                pandy[2] += "\n\t//@Ok(\"vm:template.private." + modelname.toLowerCase().replace(".","/") + "." + tname + "Update\")";
                 pandy[2] += "\n\t//public "+tname+" toupdate(@Param(\"id\") String id, HttpServletRequest req) {";
                 pandy[2] += "\n\t\t//return daoCtl.detailByName(dao, " + tname + ".class, id);//html:obj";
                 pandy[2] += "\n\t//}";
