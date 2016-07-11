@@ -39,6 +39,9 @@ public class pandy extends JFrame {
     private FileDialog filedialog = new FileDialog(this, "选择路径对话框", FileDialog.SAVE);
     private File pandyfile;
     private File beanfile;
+    private File servicefile;//建立输出目录
+    private File controllerfile;
+    private File viewfile;
     private String onetablename = "";
     private int pagesize = 40, curpage = 1, pagecount = 1, curpagecount = 1;
 
@@ -206,11 +209,9 @@ public class pandy extends JFrame {
                     }
                     JLitemTableList3.setListData(ProceduresName);
                     result.close();
-                }
-                catch (SQLException e1) {
+                } catch (SQLException e1) {
                     e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
-                finally {
+                } finally {
                     DBConnector.freecon(con);
                     validate();
                     JlitemTPanel.setSelectedIndex(0);
@@ -353,8 +354,7 @@ public class pandy extends JFrame {
                 validate();
                 schemeselect = 0;
                 JOptionPane.showMessageDialog(this, "数据源保存成功！", "数据源保存对话框", JOptionPane.INFORMATION_MESSAGE);
-            }
-            catch (Exception e1) {
+            } catch (Exception e1) {
                 e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         } else {
@@ -412,8 +412,7 @@ public class pandy extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "数据源删除失败！", "数据源删除对话框", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        catch (Exception e1) {
+        } catch (Exception e1) {
             e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
@@ -509,73 +508,86 @@ public class pandy extends JFrame {
             }
             pandyfile = new File(dir);
             pandyfile.mkdirs();//建立输出目录
-            beanfile = new File(dir + "bean\\");
+            beanfile = new File(dir + "models\\");
             beanfile.mkdirs();//建立输出目录
+            servicefile = new File(dir + "services\\");
+            servicefile.mkdirs();//建立输出目录
+            controllerfile = new File(dir + "controllers\\");
+            controllerfile.mkdirs();//建立输出目录
+            viewfile = new File(dir + "views\\");
+            viewfile.mkdirs();//建立输出目录
             try {
                 con = DBConnector.getconecttion();
                 for (int i = 0; i < selobj.length; i++) {
+                    String sname = selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1);
+                    String xname = selobj[i].toString().toLowerCase();
+                    String mname = selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1);
+                    if (selobj[i].toString().indexOf("_") > 0) {
+                        String[] s = selobj[i].toString().split("_");//shop_goods_product  ShopGoodsProduct
+                        String temp = "";
+                        for (String s1 : s) {
+                            temp = temp + s1.toUpperCase().substring(0, 1) + s1.toLowerCase().substring(1);
+                        }
+                        sname = temp;
+                        xname = temp.toLowerCase().substring(0, 1) + temp.substring(1);
+                    }
                     String te[] = SysBuldCtl.getClassCode(con, syspage.getText(), selobj[i].toString(), author.getText(), modelname.getText());
                     /**
-                     * 基本类输出　
+                     * Models　
                      */
-                    pandyfile = new File(dir + "\\bean", selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + ".java");
+                    beanfile = new File(dir + "\\models", selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + ".java");
                     byte[] buffer = te[0].getBytes();
-                    bufferout = new BufferedOutputStream(new FileOutputStream(pandyfile));
+                    bufferout = new BufferedOutputStream(new FileOutputStream(beanfile));
                     bufferout.write(buffer);
                     bufferout.flush();
+                    bufferout.close();
                     /**
-                     * 控制类输出　
-
-                     pandyfile = new File(dir, selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + "Ctl.java");
-                     buffer = te[1].getBytes();
-                     bufferout = new BufferedOutputStream(new FileOutputStream(pandyfile));
-                     bufferout.write(buffer);
-                     bufferout.flush();
-
-                     * ACTION页面输出
+                     * Service　
+                     */
+                    servicefile = new File(dir + "\\services", sname + "Service.java");
+                    buffer = te[1].getBytes();
+                    bufferout = new BufferedOutputStream(new FileOutputStream(servicefile));
+                    bufferout.write(buffer);
+                    bufferout.flush();
+                    bufferout.close();
+                    /*
+                     * Controller
                      */
 
-                    pandyfile = new File(dir, selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + "Action.java");
+                    controllerfile = new File(dir + "\\controllers", sname + "Controller.java");
                     buffer = te[2].getBytes();
-                    bufferout = new BufferedOutputStream(new FileOutputStream(pandyfile));
+                    bufferout = new BufferedOutputStream(new FileOutputStream(controllerfile));
                     bufferout.write(buffer);
                     bufferout.flush();
+                    bufferout.close();
                     /**
-                     * 新增页面输出
-
-                     pandyfile = new File(dir, selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + "Add.html");
-                     buffer = te[3].getBytes();
-                     bufferout = new BufferedOutputStream(new FileOutputStream(pandyfile));
-                     bufferout.write(buffer);
-                     bufferout.flush();*/
-
+                     * Index.html
+                     */
+                    viewfile = new File(dir + "\\views", "index.html");
+                    buffer = te[3].getBytes();
+                    bufferout = new BufferedOutputStream(new FileOutputStream(viewfile));
+                    bufferout.write(buffer);
+                    bufferout.flush();
+                    bufferout.close();
                     /**
-                     * 修改页面输出
-
-                     pandyfile = new File(dir, selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + "Update.html");
-                     buffer = te[4].getBytes();
-                     bufferout = new BufferedOutputStream(new FileOutputStream(pandyfile));
-                     bufferout.write(buffer);
-                     bufferout.flush();*/
-
+                     * Add.html
+                     */
+                    viewfile = new File(dir + "\\views", "add.html");
+                    buffer = te[4].getBytes();
+                    bufferout = new BufferedOutputStream(new FileOutputStream(viewfile));
+                    bufferout.write(buffer);
+                    bufferout.flush();
+                    bufferout.close();
                     /**
-                     * 浏览页面输出
+                     * Edit.html
+                     */
+                    viewfile = new File(dir + "\\views", "edit.html");
+                    buffer = te[5].getBytes();
+                    bufferout = new BufferedOutputStream(new FileOutputStream(viewfile));
+                    bufferout.write(buffer);
+                    bufferout.flush();
+                    bufferout.close();
 
-                     pandyfile = new File(dir, selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + "Detail.html");
-                     buffer = te[5].getBytes();
-                     bufferout = new BufferedOutputStream(new FileOutputStream(pandyfile));
-                     bufferout.write(buffer);
-                     bufferout.flush();*/
-
-                    /**
-                     * 列表页面输出
-
-                     pandyfile = new File(dir, selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + "List.html");
-                     buffer = te[6].getBytes();
-                     bufferout = new BufferedOutputStream(new FileOutputStream(pandyfile));
-                     bufferout.write(buffer);
-                     bufferout.flush();
-                     bufferout.close(); */
                 }
                 JOptionPane.showMessageDialog(this, "所有类生成成功！", "生成类对话框", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e1) {
@@ -722,8 +734,7 @@ public class pandy extends JFrame {
 
                 }
                 JOptionPane.showMessageDialog(this, pan, "脚本执行对话框", JOptionPane.INFORMATION_MESSAGE);
-            }
-            catch (Exception e1) {
+            } catch (Exception e1) {
                 e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
 
@@ -910,7 +921,7 @@ public class pandy extends JFrame {
         label2 = new JLabel();
 
         //======== this ========
-        setTitle("Nutz Codematic \uff0d \u6570\u636e\u5e93");
+        setTitle("Nutz Codematic v3.0 \uff0d \u6570\u636e\u5e93");
         setIconImage(new ImageIcon(getClass().getResource("/images/title.gif")).getImage());
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -1383,7 +1394,7 @@ public class pandy extends JFrame {
                     modelname.setText("xxx");
                     modelname.addKeyListener(new KeyAdapter() {
                         public void keyReleased(KeyEvent e) {
-                            syspage.setText("cn.xuetang.modules." + modelname.getText());
+                            syspage.setText("cn.wizzer.modules." + modelname.getText());
 
                         }
                     });
@@ -1397,7 +1408,7 @@ public class pandy extends JFrame {
                     panel11.add(label99, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                             new Insets(0, 0, 0, 0), 0, 0));
-                    author.setText("Wizzer");
+                    author.setText("Wizzer.cn");
                     panel11.add(author, new GridBagConstraints(1, 1, 2, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                             new Insets(0, 0, 0, 0), 0, 0));
@@ -1408,7 +1419,7 @@ public class pandy extends JFrame {
                     panel11.add(label8, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                             new Insets(0, 0, 0, 0), 0, 0));
-                    syspage.setText("cn.xuetang.modules.xxx");
+                    syspage.setText("cn.wizzer.modules.xxx");
                     syspage.setEditable(true);
                     panel11.add(syspage, new GridBagConstraints(1, 2, 2, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,

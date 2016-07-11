@@ -1,10 +1,16 @@
-NutzCodematic
+NutzWk 代码生成器
 =============
+可视化界面，配置数据源，选择表，直接生成增删改查代码及页面
 
-Nutz 代码生成器，连接数据库生成 Pojo、Action类。用于NutzWx 微信开源开发框架。
-
-jdk7下编译
+下载后直接双击  run.bat 运行
 
 
-适用于NutzWk开源企业级开发框架【1.0版本】：
-https://github.com/Wizzercn/NutzWk
+v3.0.0 适用版本
+============
+https://github.com/Wizzercn/NutzWk/tree/3.1.0
+
+https://github.com/Wizzercn/NutzWk/tree/3.0.4
+
+v1.0.0 适用版本
+============
+https://github.com/Wizzercn/NutzWk/tree/1.0

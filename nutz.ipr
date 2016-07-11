@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactManager">
     <artifact name="nutz:jar">
-      <output-path>F:/nutz</output-path>
+      <output-path>$PROJECT_DIR$/..</output-path>
       <root id="root">
         <element id="archive" name="nutz.jar">
           <element id="directory" name="META-INF">
@@ -39,9 +39,7 @@
       </profile>
     </annotationProcessing>
   </component>
-  <component name="CopyrightManager" default="">
-    <module2copyright />
-  </component>
+  <component name="CopyrightManager" default="" />
   <component name="DependenciesAnalyzeManager">
     <option name="myForwardDirection" value="false" />
   </component>
@@ -249,4 +247,3 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
-
