@@ -201,7 +201,18 @@
     <option name="myCurrentFavoritesList" value="nutz" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.23539823">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -221,9 +232,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/pandy/sys/SysBuldCtl.java" />
         <option value="$PROJECT_DIR$/src/pandy.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -671,6 +682,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
@@ -776,12 +793,12 @@
       <workItem from="1408947363505" duration="397000" />
       <workItem from="1408949882233" duration="619000" />
       <workItem from="1411485925321" duration="538000" />
-      <workItem from="1468205817816" duration="12610000" />
+      <workItem from="1468205817816" duration="13222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19829000" />
+    <option name="totallyTimeSpent" value="20441000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -804,8 +821,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-15" y="0" width="1378" height="754" extended-state="1" />
-    <editor active="false" />
+    <frame x="-15" y="0" width="1378" height="754" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988507" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -935,7 +952,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="537" column="67" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -945,7 +962,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1392" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -974,7 +991,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="600" column="35" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -984,7 +1001,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1392" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1013,7 +1030,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="72" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1023,7 +1040,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1392" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1052,7 +1069,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1062,7 +1079,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1392" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1091,7 +1108,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="39" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1101,7 +1118,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1392" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1130,7 +1147,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1140,7 +1157,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1375" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1169,7 +1186,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="637" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1179,7 +1196,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1375" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1208,7 +1225,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="649" column="60" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1305,14 +1322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20176992">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -1358,7 +1367,7 @@
         <state vertical-scroll-proportion="0.21136767">
           <caret line="1410" column="45" selection-start-line="1410" selection-start-column="45" selection-end-line="1410" selection-end-column="45" />
           <folding>
-            <marker date="1468220721043" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196181" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
         </state>
       </provider>
@@ -1368,8 +1377,16 @@
         <state vertical-scroll-proportion="0.46714032">
           <caret line="94" column="73" selection-start-line="94" selection-start-column="73" selection-end-line="94" selection-end-column="73" />
           <folding>
-            <marker date="1468220597241" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
+            <marker date="1468221196186" expanded="true" signature="-1:-1" placeholder="select * fro..missingValue..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23539823">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -4,6 +4,7 @@ NutzWk 代码生成器
 
 下载后直接双击  run.bat 运行
 
+https://github.com/Wizzercn/NutzCodematic/issues/1  使用教程
 
 v3.0.0 适用版本
 ============
