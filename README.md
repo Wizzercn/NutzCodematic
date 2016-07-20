@@ -8,7 +8,9 @@ https://github.com/Wizzercn/NutzCodematic/issues/1  使用教程
 
 v3.0.0 适用版本
 ============
-https://github.com/Wizzercn/NutzWk/tree/v3.1.1
+https://github.com/Wizzercn/NutzWk/tree/v3.2.0
+
+https://github.com/Wizzercn/NutzWk/tree/v3.1.2
 
 https://github.com/Wizzercn/NutzWk/tree/v3.0.5
 
