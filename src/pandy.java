@@ -508,11 +508,11 @@ public class pandy extends JFrame {
             }
             pandyfile = new File(dir);
             pandyfile.mkdirs();//建立输出目录
-            beanfile = new File(dir + "models\\");
+            beanfile = new File(dir + "models\\"+modelname.getText()+"\\");
             beanfile.mkdirs();//建立输出目录
-            servicefile = new File(dir + "services\\");
+            servicefile = new File(dir + "services\\"+modelname.getText()+"\\");
             servicefile.mkdirs();//建立输出目录
-            controllerfile = new File(dir + "controllers\\");
+            controllerfile = new File(dir + "controllers\\platform\\"+modelname.getText()+"\\");
             controllerfile.mkdirs();//建立输出目录
             viewfile = new File(dir + "views\\");
             viewfile.mkdirs();//建立输出目录
@@ -535,7 +535,7 @@ public class pandy extends JFrame {
                     /**
                      * Models　
                      */
-                    beanfile = new File(dir + "\\models", selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + ".java");
+                    beanfile = new File(dir + "\\models\\"+modelname.getText(), selobj[i].toString().toUpperCase().substring(0, 1) + selobj[i].toString().toLowerCase().substring(1) + ".java");
                     byte[] buffer = te[0].getBytes();
                     bufferout = new BufferedOutputStream(new FileOutputStream(beanfile));
                     bufferout.write(buffer);
@@ -544,7 +544,7 @@ public class pandy extends JFrame {
                     /**
                      * Service　
                      */
-                    servicefile = new File(dir + "\\services", sname + "Service.java");
+                    servicefile = new File(dir + "\\services\\"+modelname.getText(), sname + "Service.java");
                     buffer = te[1].getBytes();
                     bufferout = new BufferedOutputStream(new FileOutputStream(servicefile));
                     bufferout.write(buffer);
@@ -554,7 +554,7 @@ public class pandy extends JFrame {
                      * Controller
                      */
 
-                    controllerfile = new File(dir + "\\controllers", sname + "Controller.java");
+                    controllerfile = new File(dir + "\\controllers\\platform\\"+modelname.getText(), sname + "Controller.java");
                     buffer = te[2].getBytes();
                     bufferout = new BufferedOutputStream(new FileOutputStream(controllerfile));
                     bufferout.write(buffer);
@@ -1392,12 +1392,13 @@ public class pandy extends JFrame {
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                             new Insets(0, 0, 0, 0), 0, 0));
                     modelname.setText("xxx");
-                    modelname.addKeyListener(new KeyAdapter() {
-                        public void keyReleased(KeyEvent e) {
-                            syspage.setText("cn.wizzer.modules." + modelname.getText());
-
-                        }
-                    });
+//                    modelname.addKeyListener(new KeyAdapter() {
+//                        public void keyReleased(KeyEvent e) {
+//                            syspage.setText("cn.wizzer.modules." + modelname.getText());
+//
+//                        }
+//                    });
+//
                     panel11.add(modelname, new GridBagConstraints(1, 0, 2, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                             new Insets(0, 0, 0, 0), 0, 0));
@@ -1419,7 +1420,7 @@ public class pandy extends JFrame {
                     panel11.add(label8, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                             new Insets(0, 0, 0, 0), 0, 0));
-                    syspage.setText("cn.wizzer.modules.xxx");
+                    syspage.setText("cn.wizzer.modules");
                     syspage.setEditable(true);
                     panel11.add(syspage, new GridBagConstraints(1, 2, 2, 1, 0.0, 0.0,
                             GridBagConstraints.CENTER, GridBagConstraints.BOTH,

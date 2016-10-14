@@ -14,7 +14,7 @@ public class SysBuldCtl {
         /**
          * pandy[0]为生成的基本类，pandy[1]为生成的控制类
          */
-        String topstr = "package " + pagename + ".models;\n\nimport cn.wizzer.common.base.Model;\nimport org.nutz.dao.entity.annotation.*;\n\nimport java.io.Serializable;\n";
+        String topstr = "package " + pagename + ".models." + modelname + ";\n\nimport cn.wizzer.common.base.Model;\nimport org.nutz.dao.entity.annotation.*;\n\nimport java.io.Serializable;\n";
         try {
             int i = 0;
             int dbtype = 0;   //默认为SQLSERVER类型
@@ -138,9 +138,9 @@ public class SysBuldCtl {
             pandy[0] = topstr + pandy[0] + "\n}";
             //Service
             pandy[1] = "";
-            pandy[1] += "package " + pagename + ".services;\n";
+            pandy[1] += "package " + pagename + ".services." + modelname + ";\n";
             pandy[1] += "\nimport cn.wizzer.common.base.Service;";
-            pandy[1] += "\nimport " + pagename + ".models." + mname + ";";
+            pandy[1] += "\nimport " + pagename + ".models." + modelname + "." + mname + ";";
             pandy[1] += "\nimport org.nutz.dao.Dao;";
             pandy[1] += "\nimport org.nutz.ioc.loader.annotation.IocBean;";
             pandy[1] += "\n\n";
@@ -151,13 +151,13 @@ public class SysBuldCtl {
             pandy[1] += "\n\t\t\t\tsuper(dao);";
             pandy[1] += "\n\t\t}";
             pandy[1] += "\n}";
-            String pktype="long";
-            if(pk==2){
-                pktype="String";
+            String pktype = "long";
+            if (pk == 2) {
+                pktype = "String";
             }
             //Controller页面代码生成
             pandy[2] = "";
-            pandy[2] += "package " + pagename + ".controllers;\n";
+            pandy[2] += "package " + pagename + ".controllers.platform." + modelname + ";\n";
             pandy[2] += "\nimport cn.wizzer.common.annotation.SLog;";
             pandy[2] += "\nimport cn.wizzer.common.base.Result;";
             pandy[2] += "\nimport cn.wizzer.common.filter.PrivateFilter;";
@@ -173,25 +173,25 @@ public class SysBuldCtl {
             pandy[2] += "\nimport org.nutz.mvc.annotation.*;\n";
             pandy[2] += "\nimport javax.servlet.http.HttpServletRequest;";
             pandy[2] += "\nimport java.util.List;\n";
-            pandy[2] += "\nimport " + pagename + ".models." + mname + ";";
-            pandy[2] += "\nimport " + pagename + ".services." + sname + "Service;";
+            pandy[2] += "\nimport " + pagename + ".models." + modelname + "." + mname + ";";
+            pandy[2] += "\nimport " + pagename + ".services." + modelname + "." + sname + "Service;";
             pandy[2] += "\n\n";
             pandy[2] += "/**\n * @author " + author + "\n * @time " + DateUtil.date2str(new java.util.Date()) + "\n * \n */";
             pandy[2] += "\n@IocBean";
-            pandy[2] += "\n@At(\"/private/" + modelname.toLowerCase().replace(".", "/") + "/" + sname.toLowerCase() + "\")";
+            pandy[2] += "\n@At(\"/platform/" + modelname.toLowerCase().replace(".", "/") + "/" + sname.toLowerCase() + "\")";
             pandy[2] += "\n@Filters({ @By(type = PrivateFilter.class)})";
             pandy[2] += "\npublic class " + sname + "Controller {\nprivate static final Log log = Logs.get();";
             pandy[2] += "\n\t@Inject";
             pandy[2] += "\n\t" + sname + "Service " + xname + "Service;\n";
             pandy[2] += "\n\t@At(\"\")";
-            pandy[2] += "\n\t@Ok(\"beetl:/private/" + modelname.toLowerCase().replace(".", "/") + "/index.html\")";
+            pandy[2] += "\n\t@Ok(\"beetl:/platform/" + modelname.toLowerCase().replace(".", "/") + "/index.html\")";
             pandy[2] += "\n\t@RequiresAuthentication";
             pandy[2] += "\n\tpublic void index() {";
             pandy[2] += "\n\t\t";
             pandy[2] += "\n\t}";
             pandy[2] += "\n\t";
             pandy[2] += "\n\t@At";
-            pandy[2] += "\n\t@Ok(\"beetl:/private/" + modelname.toLowerCase().replace(".", "/") + "/add.html\")";
+            pandy[2] += "\n\t@Ok(\"beetl:/platform/" + modelname.toLowerCase().replace(".", "/") + "/add.html\")";
             pandy[2] += "\n\t@RequiresAuthentication";
             pandy[2] += "\n\tpublic void add() {";
             pandy[2] += "\n\t";
@@ -199,7 +199,7 @@ public class SysBuldCtl {
             pandy[2] += "\n\t";
             pandy[2] += "\n\t@At";
             pandy[2] += "\n\t@Ok(\"json\")";
-            pandy[2] += "\n\t@RequiresPermissions(\"private." + modelname + ".add\")";
+            pandy[2] += "\n\t@RequiresPermissions(\"platform." + modelname + ".add\")";
             pandy[2] += "\n\t@SLog(tag = \"Add\", msg = \"Add:" + tablename + "\")";
             pandy[2] += "\n\tpublic Object addDo(@Param(\"..\") " + mname + " " + tablename.toLowerCase() + ", HttpServletRequest req) {";
             pandy[2] += "\n\t\ttry {";
@@ -211,15 +211,15 @@ public class SysBuldCtl {
             pandy[2] += "\n\t}";
             pandy[2] += "\n\t";
             pandy[2] += "\n\t@At(\"/edit/?\")";
-            pandy[2] += "\n\t@Ok(\"beetl:/private/" + modelname.toLowerCase().replace(".", "/") + "/edit.html\")";
+            pandy[2] += "\n\t@Ok(\"beetl:/platform/" + modelname.toLowerCase().replace(".", "/") + "/edit.html\")";
             pandy[2] += "\n\t@RequiresAuthentication";
-            pandy[2] += "\n\tpublic Object edit("+pktype+" id) {";
+            pandy[2] += "\n\tpublic Object edit(" + pktype + " id) {";
             pandy[2] += "\n\t\treturn " + xname + "Service.fetch(id);";
             pandy[2] += "\n\t}";
             pandy[2] += "\n\t";
             pandy[2] += "\n\t@At";
             pandy[2] += "\n\t@Ok(\"json\")";
-            pandy[2] += "\n\t@RequiresPermissions(\"private." + modelname + ".edit\")";
+            pandy[2] += "\n\t@RequiresPermissions(\"platform." + modelname + ".edit\")";
             pandy[2] += "\n\t@SLog(tag = \"Edit\", msg = \"Edit:" + tablename + "\")";
             pandy[2] += "\n\tpublic Object editDo(@Param(\"..\") " + mname + " " + tablename.toLowerCase() + ", HttpServletRequest req) {";
             pandy[2] += "\n\t\ttry {";
@@ -232,9 +232,9 @@ public class SysBuldCtl {
             pandy[2] += "\n\t";
             pandy[2] += "\n\t@At({\"/delete\",\"/delete/?\"})";
             pandy[2] += "\n\t@Ok(\"json\")";
-            pandy[2] += "\n\t@RequiresPermissions(\"private." + modelname + ".delete\")";
+            pandy[2] += "\n\t@RequiresPermissions(\"platform." + modelname + ".delete\")";
             pandy[2] += "\n\t@SLog(tag = \"Delete\", msg = \"Delete:" + tablename + "\")";
-            pandy[2] += "\n\tpublic Object delete("+pktype+" id,@Param(\"ids\") "+pktype+"[] ids, HttpServletRequest req) {";
+            pandy[2] += "\n\tpublic Object delete(" + pktype + " id,@Param(\"ids\") " + pktype + "[] ids, HttpServletRequest req) {";
             pandy[2] += "\n\t\ttry {";
             pandy[2] += "\n\t\t\tif(ids!=null&&ids.length>0){";
             pandy[2] += "\n\t\t\t\t" + xname + "Service.deleteByIds(ids);";
@@ -264,7 +264,7 @@ public class SysBuldCtl {
             pandy[3] = FileUtil.getFileCnt("templete//index.html");
             String th = "";
             String table = "";
-            String tpath = "/private/" + modelname.toLowerCase().replace(".", "/") + "/" + sname.toLowerCase();
+            String tpath = "/platform/" + modelname.toLowerCase().replace(".", "/") + "/" + sname.toLowerCase();
             for (i = 0; i < listname.length; i++) {
                 th += "\t\t\t\t<th>" + listname[i][0] + "</th>\n";
                 if (i == listname.length - 1) {
