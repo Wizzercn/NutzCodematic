@@ -237,7 +237,7 @@ public class SysBuldCtl {
             pandy[2] += "\n\tpublic Object delete(" + pktype + " id,@Param(\"ids\") " + pktype + "[] ids, HttpServletRequest req) {";
             pandy[2] += "\n\t\ttry {";
             pandy[2] += "\n\t\t\tif(ids!=null&&ids.length>0){";
-            pandy[2] += "\n\t\t\t\t" + xname + "Service.deleteByIds(ids);";
+            pandy[2] += "\n\t\t\t\t" + xname + "Service.delete(ids);";
             pandy[2] += "\n\t\t\t}else{";
             pandy[2] += "\n\t\t\t\t" + xname + "Service.delete(id);";
             pandy[2] += "\n\t\t\t}";
