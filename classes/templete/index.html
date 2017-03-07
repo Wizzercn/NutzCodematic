@@ -3,8 +3,8 @@ layout("/layouts/platform.html"){
 %>
 <header class="header navbar bg-white shadow">
     <div class="btn-group tool-button">
-        <a class="btn btn-primary navbar-btn" href="${base}#path#/add" data-pjax><i class="ti-plus"></i> Ìí¼ÓÕÊºÅ</a>
-        <button class="btn btn-danger navbar-btn" onclick="delCheck()"><i class="ti-close"></i> É¾³ıÑ¡ÖĞ</button>
+        <a class="btn btn-primary navbar-btn" href="${base}#path#/add" data-pjax><i class="ti-plus"></i> æ·»åŠ å¸å·</a>
+        <button class="btn btn-danger navbar-btn" onclick="delCheck()"><i class="ti-close"></i> åˆ é™¤é€‰ä¸­</button>
     </div>
 </header>
 <div class=panel-body style="padding-top: 50px;">
@@ -21,19 +21,19 @@ layout("/layouts/platform.html"){
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">¡Á</button>
-                <h4 class="modal-title">É¾³ı</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
+                <h4 class="modal-title">åˆ é™¤</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12">
-                        É¾³ıºóÎŞ·¨»Ö¸´£¬È·¶¨É¾³ıÂğ£¿ <br/>
+                        åˆ é™¤åæ— æ³•æ¢å¤ï¼Œç¡®å®šåˆ é™¤å—ï¼Ÿ <br/>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">È¡ Ïû</button>
-                <button id="ok" type="button" class="btn btn-primary" data-loading-text="ÕıÔÚÉ¾³ı...">È· ¶¨</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">å– æ¶ˆ</button>
+                <button id="ok" type="button" class="btn btn-primary" data-loading-text="æ­£åœ¨åˆ é™¤...">ç¡® å®š</button>
             </div>
         </div>
     </div>
@@ -72,8 +72,8 @@ layout("/layouts/platform.html"){
                     "render": function (data, type, row) {
                         return '<div class="btn-group"><button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">' +
                                 ' <i class="ti-settings"></i> <span class="ti-angle-down"></span></button><ul class="dropdown-menu" role="menu">' +
-                                '<li><a href="${base}#path#/edit/' + row.id + '" data-pjax>ĞŞ¸Ä</a></li>' +
-                                '<li><a href="javascript:;" onclick="del(\'' + row.id + '\')">É¾³ı</a></li>' +
+                                '<li><a href="${base}#path#/edit/' + row.id + '" data-pjax>ä¿®æ”¹</a></li>' +
+                                '<li><a href="javascript:;" onclick="del(\'' + row.id + '\')">åˆ é™¤</a></li>' +
                                 '</ul></div>';
                     },
                     "targets": 4
@@ -100,7 +100,7 @@ layout("/layouts/platform.html"){
                 } else {
                     Toast.error(data.msg);
                 }
-                //ÖØÖÃ°´Å¥×´Ì¬£¬¹Ø±ÕÌáÊ¾¿ò
+                //é‡ç½®æŒ‰é’®çŠ¶æ€ï¼Œå…³é—­æç¤ºæ¡†
                 btn.button("reset");
                 dialog.modal("hide");
             }, "json");
@@ -130,12 +130,13 @@ layout("/layouts/platform.html"){
                 }, "json");
             });
         } else {
-            Toast.warning("ÇëÏÈÑ¡ÔñÒªÉ¾³ıµÄÏîÄ¿£¡");
+            Toast.warning("è¯·å…ˆé€‰æ‹©è¦åˆ é™¤çš„é¡¹ç›®ï¼");
         }
     }
     $(function () {
         initDatatable();
     });
 </script>
+    
 
 <%}%>
